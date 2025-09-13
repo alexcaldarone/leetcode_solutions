@@ -46,3 +46,17 @@ class Solution:
                 res += 1
 
         return res
+    
+class Solution2:
+    def waysToSplitArray(self, nums: List[int]) -> int:
+        res = 0
+        left = 0
+        right = sum(nums)
+
+        for i in range(len(nums)-1):
+            left += nums[i]
+            right -= nums[i]
+            if left >= right:
+                res += 1
+        
+        return res
