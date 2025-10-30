@@ -38,3 +38,26 @@ class Solution:
                 heapq.heappush(heap, (curr_freq, curr_num))
         
         return len(heap)
+
+# alternative solution which uses slightly less iterations
+class Solution:
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        counts = defaultdict(int)
+
+        for num in arr: 
+            counts[num] += 1
+        
+        # store the frequencies and the numbers in a list
+        heap = [(freq, num) for num, freq in counts.items()]
+
+        heapq.heapify(heap)
+
+        while heap and k > 0:
+            curr_freq, curr_num = heapq.heappop(heap)
+            if k - curr_freq >= 0:
+                k -= curr_freq
+            else:
+                heapq.heappush(heap, (curr_freq-k, curr_num))
+                break
+        
+        return len(heap)
