@@ -23,7 +23,7 @@ from CART import ClassificationTree, RegressionTree
 # ====== Helpers ======
 
 def eval_classification(model, X_train, y_train, X_test, y_test, name=""):
-    model.train(X_train, y_train)
+    model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
     bacc = balanced_accuracy_score(y_test, y_pred)
@@ -31,7 +31,7 @@ def eval_classification(model, X_train, y_train, X_test, y_test, name=""):
     print(f"[CLS] {name:20s}  acc={acc:.3f}  bacc={bacc:.3f}  f1w={f1:.3f}")
 
 def eval_regression(model, X_train, y_train, X_test, y_test, name=""):
-    model.train(X_train, y_train)
+    model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     rmse = root_mean_squared_error(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
@@ -43,7 +43,7 @@ def sanity_pure_node(model_cls):
     X = np.random.RandomState(0).randn(20, 3)
     y = np.zeros(20)  # single class or constant target
     model = model_cls(max_depth=None, min_samples_split=2)
-    model.train(X, y)
+    model.fit(X, y)
     y_hat = model.predict(X)
     assert np.all(y_hat == y), "Pure-node sanity check failed: predictions should be constant."
     print("[SANITY] Pure-node case passed.")
@@ -53,7 +53,7 @@ def sanity_no_split(model_cls):
     X = np.ones((30, 4))
     y = np.concatenate([np.zeros(15), np.ones(15)])  # still should not split (no gain)
     model = model_cls(max_depth=None, min_samples_split=2)
-    model.train(X, y)
+    model.fit(X, y)
     y_hat = model.predict(X)
     # For classifier: majority vote; for regressor: mean
     print("[SANITY] No-split case ran. Pred unique:", np.unique(y_hat))

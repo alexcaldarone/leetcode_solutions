@@ -137,7 +137,7 @@ class DecisionTree(ABC):
         else:
             return self.__traverse(node.get_right(), x)
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         D = np.concatenate((X, y.reshape(-1, 1)), axis=1)
         self.root = Node()
         self.__grow(self.root, D, 1)
