@@ -28,3 +28,21 @@ class Solution:
                 res[i] = 1 + res[i-1]
         
         return sum(res)
+
+class Solution:
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if n < 3:
+            return 0
+        
+        curr = 0
+        res = 0
+        for r in range(2, n):
+            if nums[r] - nums[r-1] == nums[r-1] - nums[r-2]:
+                curr += 1
+                res += curr
+            else:
+                curr = 0
+        
+        return res
