@@ -16,6 +16,8 @@ Example 2:
     Output: 0
 """
 
+from typing import List
+
 class Solution:
     def numberOfArithmeticSlices(self, nums: list[int]) -> int:
         if len(nums) < 3:
