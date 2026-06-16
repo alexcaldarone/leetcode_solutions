@@ -12,6 +12,7 @@ Example 2:
 """
 
 from typing import List
+from collections import defaultdict, Counter
 
 class Solution:
     def generatePalindromes(self, s: str) -> List[str]:
